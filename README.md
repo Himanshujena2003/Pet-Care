@@ -6,7 +6,7 @@ Welcome to the **PetCare Service Center** project! This is a web application des
 
 - **Pet Grooming Services:** Bathing, haircuts, nail clipping, and more to keep your pet clean and looking great.
 - **Pet Nursing & Health Care:** Post-surgery care, medication administration, health monitoring, and dietary guidance.
-- **Physical Fitness Games & Activities:** Interactive play, agility training, fetch, and group play to keep your pet physically and mentally stimulated.
+- **Physical Fitness Games & Activities:** Interactive play, agility training, fetch, and group play to keep your pet physically and mentally.
 
 ## Services Offered
 

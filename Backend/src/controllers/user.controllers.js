@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import dotenv from "dotenv"
 import {user} from "../models/user.model.js"
-import { bookings } from "../models/bookings.model.js"
+import {bookings} from "../models/bookings.model.js"
 import zod from "zod"
 dotenv.config()
 
@@ -117,9 +117,8 @@ const addBooking = async(req,res)=>{
 // Profile
 const profileData = async(req,res)=>{
     try{
-        const reqData = req.body
-        const userData = await user.findOne({email:reqData.email})
-        const bookingData = await bookings.find({user:reqData._id})
+        const userData = await user.findOne({email:req.email})
+        const bookingData = await bookings.find({user:req._id})
 
         if(!userData){
             return res.json({message:"User not found"})

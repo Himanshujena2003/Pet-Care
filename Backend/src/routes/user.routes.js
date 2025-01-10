@@ -5,9 +5,9 @@ import authenticate from "../middlewares/authentication.js";
 const userRouter = Router();
 
 userRouter.route("/signup").post(registerUser)
-userRouter.route("/signin",authenticate).post(loginUser)
+userRouter.route("/signin").post(loginUser)
 userRouter.route("/booking").post(addBooking)
-userRouter.route("/profile").get(profileData)
+userRouter.route("/profile",authenticate).post(profileData)
 
 
 export default userRouter

@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import bcrypt from "bcrypt"
 
 const userSchema = new mongoose.Schema({
     fullName:{
@@ -31,8 +32,8 @@ function userModel(){
     user = mongoose.model("User",userSchema)
 }
 
-userSchema.methods.isValidPassword = async function(password) {
-    return await bcrypt.compare(password, this.password); 
-};
+// userSchema.methods.isValidPassword = async function(password){
+//     return await bcrypt.compare(password,this.password); 
+// };
 
 export {userModel,user}

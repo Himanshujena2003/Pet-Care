@@ -10,7 +10,7 @@ const signupBody = zod.object({
     fullName:zod.string(),
     phone:zod.string(),
     email:zod.string().email(),
-    password:zod.string().password()
+    password:zod.string()
 })
 
 
@@ -25,17 +25,28 @@ const registerUser = async(req,res)=>{
         const isPhone = await user.findOne({phone:userData.phone})
 
         if(isEmail && isPhone){
-            res.json({"message":"You have already registered"})
+            res.json({"message":"You have already registered with this email or phone number"})
         }
         else if(isEmail) res.json({"message":"Email already taken"});
         else if(isPhone) res.json({"message":"Phone no. already taken"});
 
         else{
+            const token = jwt.sign(
+                {
+                    _id:userData._id,
+                    email:userData.email
+                },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn:process.env.TOKEN_EXPIRY
+        
+                }
+            )
             userData.phone=Number(userData.phone)
             userData.password = await bcrypt.hash(userData.password,10)
             const newUser = await new user(userData)
             await newUser.save();
-            res.json({"message":"User successfully created"})
+            res.json({token,"message":"User successfully created"})
         }
     }
     else{
@@ -47,11 +58,17 @@ const registerUser = async(req,res)=>{
 
 // Signin
 const loginUser = async(req,res)=>{
-    const {email,password} = req.body;
+    const {email,password}=req.body
+    const isUser = await user.findOne({email:email});
 
-    const isUser = await user.findOne({ email });
-    if (!isUser || !isUser.isValidPassword(password)) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+    if(!isUser){
+        return res.status(401).json({ message: 'Email not registered'});
+    }
+
+    const isValidPassword = bcrypt.compareSync(password,isUser.password)
+
+    if (!isValidPassword) {
+        return res.status(401).json({ message: 'Invalid password' });
     }
     
     // Access_Token creation
@@ -66,7 +83,7 @@ const loginUser = async(req,res)=>{
 
         }
     )
-    res.json({token})
+    res.json({token,message:"Successfully logged in"})
 }
 
 
@@ -100,22 +117,23 @@ const addBooking = async(req,res)=>{
 // Profile
 const profileData = async(req,res)=>{
     try{
-        const userData = await user.findOne({email:req.email})
-        const bookingData = await bookings.findById(req._id)
+        const reqData = req.body
+        const userData = await user.findOne({email:reqData.email})
+        const bookingData = await bookings.find({user:reqData._id})
 
         if(!userData){
             return res.json({message:"User not found"})
         }
 
-        else if(!bookingData){
+        else if(!bookingData.length){
             return res.json({message:"Booking details not found"})
         }
 
         res.json(
             {
-                name:user.fullName,
-                email:user.email,
-                phone:user.phone,
+                name:userData.fullName,
+                email:userData.email,
+                phone:userData.phone,
                 booked:bookingData
             }
         )

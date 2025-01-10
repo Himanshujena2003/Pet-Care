@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:true}))
 app.use("/user",userRouter)
 
 // Database connection
-// connectDb()
+connectDb()
 
 // Creating collections in database
 userModel()

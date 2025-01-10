@@ -13,6 +13,7 @@ const authenticate = (req,res,next)=>{
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify token
         req._id = decoded._id; // Store decoded _id for further use
+        req.email = decoded.email // Store decoded email for further use
         next();
     }
     catch (error) {

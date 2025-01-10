@@ -34,7 +34,7 @@ const registerUser = async(req,res)=>{
             userData.phone=Number(userData.phone)
             userData.password = await bcrypt.hash(userData.password,10)
             const newUser = await new user(userData)
-            newUser.save();
+            await newUser.save();
             res.json({"message":"User successfully created"})
         }
     }
@@ -86,7 +86,7 @@ const addBooking = async(req,res)=>{
             user: userData._id,
         })
 
-        newBooking.save()
+        await newBooking.save()
         res.json({"message":"Booking confirmed"})
     }
 

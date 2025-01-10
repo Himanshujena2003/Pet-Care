@@ -6,7 +6,7 @@ const userBookingSchema = new mongoose.Schema({
         require:true
     },
     appointmentDate:{
-        type:Date,
+        type:String,
         require:true,
     },
     appointmentTime:{

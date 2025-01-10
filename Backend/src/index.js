@@ -7,7 +7,7 @@ import connectDb from "./db/connectdb.js"
 import userRouter from "./routes/user.routes.js"
 
 dotenv.config()
-const port = process.env.PORT || 3000
+const port = 3000
 const app = express()
 
 app.use(cors())
@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:true}))
 app.use("/user",userRouter)
 
 // Database connection
-connectDb()
+// connectDb()
 
 // Creating collections in database
 userModel()

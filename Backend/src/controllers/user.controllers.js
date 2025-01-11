@@ -25,16 +25,16 @@ const registerUser = async(req,res)=>{
         const isPhone = await user.findOne({phone:userData.phone})
 
         if(isEmail && isPhone){
-            res.json({"message":"You have already registered with this email or phone number"})
+            res.json({message:'You have already registered with this email or phone number'})
         }
-        else if(isEmail) res.json({"message":"Email already taken"});
-        else if(isPhone) res.json({"message":"Phone no. already taken"});
+        else if(isEmail) res.json({message:'Email already taken'});
+        else if(isPhone) res.json({message:'Phone no. already taken'});
 
         else{
             const token = jwt.sign(
                 {
                     _id:userData._id,
-                    email:userData.email
+                    email:userData.email,
                 },
                 process.env.JWT_SECRET,
                 {
@@ -46,11 +46,11 @@ const registerUser = async(req,res)=>{
             userData.password = await bcrypt.hash(userData.password,10)
             const newUser = await new user(userData)
             await newUser.save();
-            res.json({token,"message":"User successfully created"})
+            res.json({token,fullName:userData.fullName,message:'User successfully created'})
         }
     }
     else{
-        res.json({"message":"Enter valid data"})
+        res.json({message:'Enter valid data'})
     }
     
 }
@@ -58,6 +58,7 @@ const registerUser = async(req,res)=>{
 
 // Signin
 const loginUser = async(req,res)=>{
+
     const {email,password}=req.body
     const isUser = await user.findOne({email:email});
 
@@ -75,7 +76,7 @@ const loginUser = async(req,res)=>{
     const token = jwt.sign(
         {
             _id:isUser._id,
-            email:isUser.email
+            email:isUser.email,
         },
         process.env.JWT_SECRET,
         {
@@ -83,7 +84,7 @@ const loginUser = async(req,res)=>{
 
         }
     )
-    res.json({token,message:"Successfully logged in"})
+    res.json({token,fullName:isUser.fullName})
 }
 
 
@@ -104,11 +105,11 @@ const addBooking = async(req,res)=>{
         })
 
         await newBooking.save()
-        res.json({"message":"Booking confirmed"})
+        res.json({message:'Booking confirmed'})
     }
 
     else{
-        res.json({"message":"Email is not registered"})
+        res.json({message:'Email is not registered'})
     }
     
 };
@@ -116,31 +117,55 @@ const addBooking = async(req,res)=>{
 
 // Profile
 const profileData = async(req,res)=>{
+
     try{
         const userData = await user.findOne({email:req.email})
         const bookingData = await bookings.find({user:req._id})
 
         if(!userData){
-            return res.json({message:"User not found"})
+            return res.json({message:'User not found'})
         }
 
         else if(!bookingData.length){
-            return res.json({message:"Booking details not found"})
+            return res.json(
+                {   
+                    message:'Booking details not found',
+                    fullName:userData.fullName,
+                    email:userData.email,
+                    phone:userData.phone,
+                }
+            )
         }
-
+        
         res.json(
-            {
-                name:userData.fullName,
+            {   
+                fullName:userData.fullName,
                 email:userData.email,
                 phone:userData.phone,
                 booked:bookingData
             }
         )
-
     }
     catch{
-        res.status(500).json({message:"Server error"})
+        res.status(500).json({message:'Server error'})
     }
 }
 
-export {registerUser,loginUser,addBooking,profileData}
+
+// Update password
+const updatePassword = async(req,res)=>{
+    
+    const newPassword = req.body.password;
+    
+    // from the token paylod i will get email
+    const isUser = await user.findOne({email:req.email})
+    if(!isUser){
+        return res.json({message:'Invalid token'})
+    }
+
+    isUser.password = await bcrypt(newPassword,10);
+    res.json({message:'Password updated successfully'})
+}
+
+
+export {registerUser,loginUser,addBooking,profileData,updatePassword}

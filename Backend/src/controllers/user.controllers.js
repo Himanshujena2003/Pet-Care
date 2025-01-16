@@ -108,7 +108,7 @@ const addBooking = async(req,res)=>{
     const { success, data, error } = bookingBody.safeParse(req.body);
     if (!success) {
         return res.status(411).json({
-            message: "Incorrect inputs",
+            message: "Enter valid inputs",
             error: error.errors
         });
     }
@@ -119,7 +119,7 @@ const addBooking = async(req,res)=>{
     const minute = data.minute.padStart(2, "0");
     const appointmentTime = `${hour}:${minute} ${data.ampm}`;
     const userData =await user.findOne({email:bookingEmail})
-    
+
     if(userData){
         const newBooking = new bookings({
             service: bookingData.service,

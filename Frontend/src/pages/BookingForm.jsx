@@ -38,7 +38,7 @@ const BookingForm = () => {
       !formData.place ||
       !formData.email
     ) {
-      alert("All fields are required!");
+      alert("All fields are required");
       return;
     }
 

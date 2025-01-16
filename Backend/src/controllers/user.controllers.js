@@ -155,7 +155,7 @@ const profileData = async(req,res)=>{
 // Update password
 const updatePassword = async(req,res)=>{
     
-    const newPassword = req.body.password;
+    const newPassword = req.body.newPassword;
     
     // from the token paylod i will get email
     const isUser = await user.findOne({email:req.email})
@@ -163,7 +163,7 @@ const updatePassword = async(req,res)=>{
         return res.json({message:'Invalid token'})
     }
 
-    isUser.password = await bcrypt(newPassword,10);
+    isUser.password = await bcrypt.hash(newPassword,10);
     res.json({message:'Password updated successfully'})
 }
 

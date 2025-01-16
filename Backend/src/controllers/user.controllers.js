@@ -87,19 +87,44 @@ const loginUser = async(req,res)=>{
     res.json({token,fullName:isUser.fullName})
 }
 
+const bookingBody = zod.object({
+    service: zod.enum(["Pet Nursing", "Pet Grooming", "Pet Walking"]),
+    day: zod.string().regex(/^\d{1,2}$/, "Invalid day format"),
+    month: zod.string().regex(/^\d{1,2}$/, "Invalid month format"),
+    year: zod.string().regex(/^\d{4}$/, "Invalid year format"),
+    hour: zod.string().regex(/^\d{1,2}$/, "Invalid hour format"),
+    minute: zod.string().regex(/^\d{1,2}$/, "Invalid minute format"),
+    ampm: zod.enum(["AM", "PM"]),
+    place: zod.string(),
+    email: zod.string().email()
+});
+
 
 // Add booking
 const addBooking = async(req,res)=>{
 
     const bookingData = req.body;
     const bookingEmail = req.body.email;
-    
+    const { success, data, error } = bookingBody.safeParse(req.body);
+    if (!success) {
+        return res.status(411).json({
+            message: "Incorrect inputs",
+            error: error.errors
+        });
+    }
+
+
+    const appointmentDate = `${data.day.padStart(2, "0")}/${data.month.padStart(2, "0")}/${data.year.slice(2)}`;
+    const hour = data.hour.padStart(2, "0");
+    const minute = data.minute.padStart(2, "0");
+    const appointmentTime = `${hour}:${minute} ${data.ampm}`;
     const userData =await user.findOne({email:bookingEmail})
+    
     if(userData){
         const newBooking = new bookings({
             service: bookingData.service,
-            appointmentDate: bookingData.appointmentDate,
-            appointmentTime: bookingData.appointmentTime,
+            appointmentDate: appointmentDate,
+            appointmentTime: appointmentTime,
             place: bookingData.place,
             user: userData._id,
         })

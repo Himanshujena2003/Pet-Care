@@ -10,7 +10,6 @@ const connectDb = async()=>{
     }
     catch(error){
         console.log("ERROR: ",error)
-        throw err
     }
 }
 

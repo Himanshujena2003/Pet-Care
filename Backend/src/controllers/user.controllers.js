@@ -33,7 +33,7 @@ const registerUser = async(req,res)=>{
         else{
             const token = jwt.sign(
                 {
-                    _id:userData._id,
+                    fullName:userData.fullName,
                     email:userData.email,
                 },
                 process.env.JWT_SECRET,
@@ -75,8 +75,8 @@ const loginUser = async(req,res)=>{
     // Access_Token creation
     const token = jwt.sign(
         {
-            _id:isUser._id,
-            email:isUser.email,
+            fullName:isUser.fullName,
+            email:email,
         },
         process.env.JWT_SECRET,
         {
@@ -84,7 +84,7 @@ const loginUser = async(req,res)=>{
 
         }
     )
-    res.json({token,fullName:isUser.fullName})
+    res.json({token,fullName:isUser.fullName,message:'Logged in successfully'})
 }
 
 const bookingBody = zod.object({
@@ -143,15 +143,15 @@ const addBooking = async(req,res)=>{
 // Profile
 const profileData = async(req,res)=>{
 
-    try{
-        const userData = await user.findOne({email:req.email})
-        const bookingData = await bookings.find({user:req._id})
+    const userData = await user.findOne({email:req.email});
 
-        if(!userData){
-            return res.json({message:'User not found'})
-        }
-
-        else if(!bookingData.length){
+    if(!userData){
+        return res.json({message:'User not found'})
+    }
+    
+    else{
+        const bookingData = await bookings.find({user:userData._id})
+        if(!bookingData.length){
             return res.json(
                 {   
                     message:'Booking details not found',
@@ -161,8 +161,7 @@ const profileData = async(req,res)=>{
                 }
             )
         }
-        
-        res.json(
+        return res.json(
             {   
                 fullName:userData.fullName,
                 email:userData.email,
@@ -171,9 +170,8 @@ const profileData = async(req,res)=>{
             }
         )
     }
-    catch{
-        res.status(500).json({message:'Server error'})
-    }
+    
+    
 }
 
 

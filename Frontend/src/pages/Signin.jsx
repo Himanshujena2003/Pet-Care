@@ -94,6 +94,7 @@ const Signin = () => {
               localStorage.setItem("token", response.data.token)
               localStorage.setItem("fullName", response.data.fullName);
               navigate("/home");
+              alert(response.data.message)
             }}
             label={"Sign in"}
           />

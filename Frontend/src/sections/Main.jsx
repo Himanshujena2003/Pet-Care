@@ -259,7 +259,7 @@ const Main = () => {
         </div>
 
         {/* Floating Bar */}
-        <div className="max-lg:hidden absolute -bottom-[8%] left-1/2 transform -translate-x-1/2 bg-white flex justify-between items-center px-2 lg:px-20 w-[80%] rounded-3xl shadow-2xl py-8">
+        <div className="max-lg:hidden absolute -bottom-[13%] left-1/2 transform -translate-x-1/2 bg-white flex justify-between items-center px-2 lg:px-20 w-[80%] rounded-3xl shadow-2xl py-8">
           <div className="flex gap-4 w-[33%]">
             <img
               className="h-10 w-10 lg:h-16 lg:w-16 object-cover"

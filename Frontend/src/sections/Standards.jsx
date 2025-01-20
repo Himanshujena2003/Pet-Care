@@ -85,13 +85,14 @@ const Standards = () => {
             </div>
           </div>
           {/* Image Div */}
-          <div className="max-md:hidden w-full md:w-[40%] pl-32 max-lg:pl-12">
+          <div className="max-md:hidden w-full md:w-[40%] pl-16 overflow-hidden">
             <img
               className="h-40 w-40 lg:h-72 lg:w-72 object-cover rounded-full"
               src={petBoarding}
               alt=""
             />
           </div>
+
         </div>
 
         {/* Pet Walking */}

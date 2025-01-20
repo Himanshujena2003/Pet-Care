@@ -33,7 +33,6 @@ const Profile = () => {
 
     const fetchData = async () => {
       try {
-        console.log("Sending token:", token);
         const response = await axios.get("http://localhost:3000/user/profile", {
           headers: {
             Authorization: `Bearer ${token}`,

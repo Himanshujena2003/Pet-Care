@@ -70,159 +70,162 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="bg-[#031D44] lg:bg-[#F2E3BC] h-screen w-screen flex flex-col gap-1 justify-center items-center px-8 overflow-hidden">
+    <div className="relative bg-[#031D44] lg:bg-[#F2E3BC] h-screen w-screen flex flex-col gap-1 justify-center items-center px-8">
       <img
-        className="h-12 md:h-24 absolute top-6 md:top-12 lg:top-4 lg:left-4 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2"
+        className="h-12 md:h-24 absolute top-6 md:top-12 lg:top-4 lg:left-4 max-md:left-1/2 max-md:transform max-md:-translate-x-1/2 z-30"
         src={Logo}
+        alt="Petcare Logo"
       />
 
       <img
-        className="max-lg:hidden absolute object-cover left-0 bottom-0"
+        className="max-lg:hidden absolute object-cover left-0 bottom-0 z-10"
         src={bookingCat}
+        alt="Booking Cat"
       />
       <img
-        className="max-lg:hidden absolute object-cover right-0 bottom-0"
+        className="max-lg:hidden absolute object-cover right-0 bottom-0 z-10"
         src={bookingDog}
+        alt="Booking Dog"
       />
+
       <form
-        className="md:w-[70%] lg:w-[30%] lg:bg-[#031D44] flex flex-col lg:px-5 lg:py-9 lg:rounded-3xl"
-        onSubmit={handleSubmit}
+          className="w-full sm:w-[80%] md:w-[70%] lg:w-[40%] lg:bg-[#031D44] flex flex-col lg:px-6 lg:py-8 lg:rounded-3xl relative z-30"
+          onSubmit={handleSubmit}
       >
-        <div className="flex justify-center text-2xl md:text-4xl text-[#F2E3BC] font-bold pb-4">
-          Book an Appointment
-        </div>
+      <div className="flex justify-center text-xl md:text-2xl text-[#F2E3BC] font-bold pb-3">
+        Book an Appointment
+      </div>
 
-        {/* Service */}
-        <div className="mb-4 w-full">
-          <label className="block text-[#F2E3BC] text-lg md:text-xl lg:text-lg mb-2">
-            Service
-          </label>
-          <select
-            name="service"
-            value={formData.service}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded bg-white text-[#031D44]"
-          >
-            <option value="" disabled>
-              Select a service
-            </option>
-            <option value="Pet Nursing">Pet Nursing</option>
-            <option value="Pet Grooming">Pet Grooming</option>
-            <option value="Pet Walking">Pet Walking</option>
-          </select>
-        </div>
+      {/* Service */}
+      <div className="mb-3 w-full">
+        <label className="block text-[#F2E3BC] text-sm md:text-lg lg:text-sm mb-1">
+          Service
+        </label>
+        <select
+          name="service"
+          value={formData.service}
+          onChange={handleInputChange}
+          className="w-full p-1.5 border rounded bg-white text-[#031D44] text-sm md:text-base"
+        >
+          <option value="" disabled>
+            Select a service
+          </option>
+          <option value="Pet Nursing">Pet Nursing</option>
+          <option value="Pet Grooming">Pet Grooming</option>
+          <option value="Pet Walking">Pet Walking</option>
+        </select>
+      </div>
 
-        {/* Appointment Date */}
-        <div className="mb-4">
-          <label className="block text-[#F2E3BC] text-lg md:text-xl lg:text-lg mb-2">
-            Appointment Date
-          </label>
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              name="day"
-              value={formData.day}
-              onChange={handleInputChange}
-              placeholder="DD"
-              className="w-1/3 p-2 border rounded text-center"
-            />
-            <input
-              type="text"
-              name="month"
-              value={formData.month}
-              onChange={handleInputChange}
-              placeholder="MM"
-              className="w-1/3 p-2 border rounded text-center"
-            />
-            <input
-              type="text"
-              name="year"
-              value={formData.year}
-              onChange={handleInputChange}
-              placeholder="YYYY"
-              className="w-1/3 p-2 border rounded text-center"
-            />
-          </div>
-        </div>
-
-        {/* Appointment Time */}
-        <div className="mb-4">
-          <label className="block text-[#F2E3BC] text-lg md:text-xl lg:text-lg mb-2">
-            Appointment Time
-          </label>
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              name="hour"
-              value={formData.hour}
-              onChange={handleInputChange}
-              placeholder="HH"
-              className="w-1/3 p-2 border rounded text-center"
-            />
-            <input
-              type="text"
-              name="minute"
-              value={formData.minute}
-              onChange={handleInputChange}
-              placeholder="MM"
-              className="w-1/3 p-2 border rounded text-center"
-            />
-            <select
-              name="ampm"
-              value={formData.ampm}
-              onChange={handleInputChange}
-              className="w-1/3 p-2 border rounded text-center"
-            >
-              <option className="" value="AM">
-                AM
-              </option>
-              <option value="PM">PM</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Place */}
-        <div className="mb-4">
-          <label className="block text-[#F2E3BC] text-lg md:text-xl lg:text-lg mb-2">
-            Place
-          </label>
+      {/* Appointment Date */}
+      <div className="mb-3">
+        <label className="block text-[#F2E3BC] text-sm md:text-lg lg:text-sm mb-1">
+          Appointment Date
+        </label>
+        <div className="flex space-x-1">
           <input
             type="text"
-            name="place"
-            value={formData.place}
+            name="day"
+            value={formData.day}
             onChange={handleInputChange}
-            placeholder="Enter place"
-            className="w-full p-2 border rounded "
+            placeholder="DD"
+            className="w-1/3 p-1.5 border rounded text-center text-sm"
           />
-        </div>
-
-        {/* Email */}
-        <div className="mb-4">
-          <label className="block text-[#F2E3BC] text-lg md:text-xl lg:text-lg mb-2">
-            Email
-          </label>
           <input
-            type="email"
-            name="email"
-            value={formData.email}
+            type="text"
+            name="month"
+            value={formData.month}
             onChange={handleInputChange}
-            placeholder="Enter your email"
-            className="w-full p-2 border rounded mb-8"
+            placeholder="MM"
+            className="w-1/3 p-1.5 border rounded text-center text-sm"
+          />
+          <input
+            type="text"
+            name="year"
+            value={formData.year}
+            onChange={handleInputChange}
+            placeholder="YYYY"
+            className="w-1/3 p-1.5 border rounded text-center text-sm"
           />
         </div>
+      </div>
 
-        <div className="w-full flex flex-col justify-center items-center">
-          <img className="h-16 lg:hidden" src={bookingCatPhone} alt="" />
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-[55%] bg-[#F2E3BC] text-[#031D44] py-4 rounded-full text-lg font-bold"
+      {/* Appointment Time */}
+      <div className="mb-3">
+        <label className="block text-[#F2E3BC] text-sm md:text-lg lg:text-sm mb-1">
+          Appointment Time
+        </label>
+        <div className="flex space-x-1">
+          <input
+            type="text"
+            name="hour"
+            value={formData.hour}
+            onChange={handleInputChange}
+            placeholder="HH"
+            className="w-1/3 p-1.5 border rounded text-center text-sm"
+          />
+          <input
+            type="text"
+            name="minute"
+            value={formData.minute}
+            onChange={handleInputChange}
+            placeholder="MM"
+            className="w-1/3 p-1.5 border rounded text-center text-sm"
+          />
+          <select
+            name="ampm"
+            value={formData.ampm}
+            onChange={handleInputChange}
+            className="w-1/3 p-1.5 border rounded text-center text-sm"
           >
-            Submit Booking
-          </button>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
         </div>
-      </form>
-    </div>
+      </div>
+
+      {/* Place */}
+      <div className="mb-3">
+        <label className="block text-[#F2E3BC] text-sm md:text-lg lg:text-sm mb-1">
+          Place
+        </label>
+        <input
+          type="text"
+          name="place"
+          value={formData.place}
+          onChange={handleInputChange}
+          placeholder="Enter place"
+          className="w-full p-1.5 border rounded text-sm"
+        />
+      </div>
+
+      {/* Email */}
+      <div className="mb-3">
+        <label className="block text-[#F2E3BC] text-sm md:text-lg lg:text-sm mb-1">
+          Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder="Enter your email"
+          className="w-full p-1.5 border rounded mb-6 text-sm"
+        />
+      </div>
+
+      <div className="w-full flex flex-col justify-center items-center">
+        <img className="h-14 lg:hidden" src={bookingCatPhone} alt="Booking Cat on Phone" />
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-[55%] bg-[#F2E3BC] text-[#031D44] py-3 rounded-full text-sm font-bold"
+        >
+          Submit Booking
+        </button>
+      </div>
+    </form>
+  </div>
+
   );
 };
 

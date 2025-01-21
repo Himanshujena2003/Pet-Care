@@ -50,10 +50,12 @@ const Standards = () => {
               Pet Nursing
             </div>
             <div className="text-xs md:text-sm lg:text-lg text-[#031D44] max-md:text-center">
-              Our Place offers nice Pet Boarding Our Place offers nice Pet
-              Boarding Our Place offers nice Pet Boarding Our Place offers nice
-              Pet Boarding Our Place offers nice Pet Boarding Our Place offers
-              nice Pet Boarding
+            Pet nursing involves providing specialized care and medical
+              attention to animals, focusing on their health, comfort, and
+              recovery. It includes administering medications, wound care,
+              monitoring vital signs, and assisting veterinarians in diagnostic
+              and surgical procedures. Pet nurses also support owners with
+              guidance on pet health, diet, and post-treatment care.
             </div>
           </div>
         </div>
@@ -78,10 +80,11 @@ const Standards = () => {
               Pet Grooming
             </div>
             <div className="text-xs md:text-sm lg:text-lg text-[#031D44] max-md:text-center">
-              Our Place offers nice Pet Boarding Our Place offers nice Pet
-              Boarding Our Place offers nice Pet Boarding Our Place offers nice
-              Pet Boarding Our Place offers nice Pet Boarding Our Place offers
-              nice Pet Boarding
+            Pet grooming is the practice of maintaining an animal's hygiene
+              and appearance through services like bathing, brushing, nail
+              trimming, ear cleaning, and fur trimming. It helps prevent skin
+              issues, matting, and infections while ensuring the pet looks and
+              feels good.
             </div>
           </div>
           {/* Image Div */}
@@ -116,10 +119,12 @@ const Standards = () => {
               Pet Walking
             </div>
             <div className="text-xs md:text-sm lg:text-lg text-[#031D44] max-md:text-center">
-              Our Place offers nice Pet Boarding Our Place offers nice Pet
-              Boarding Our Place offers nice Pet Boarding Our Place offers nice
-              Pet Boarding Our Place offers nice Pet Boarding Our Place offers
-              nice Pet Boarding
+            Pet walking involves taking pets, primarily dogs, on regular walks
+              to ensure they get essential physical exercise, mental
+              stimulation, and socialization. It helps maintain their overall
+              health, prevent behavioral issues, and provide an outlet for their
+              energy. Regular walks also strengthen the bond between pets and
+              their owners while allowing pets to explore their environment
             </div>
           </div>
         </div>

@@ -243,7 +243,7 @@ const Main = () => {
 
           {/* Book Now Button */}
           <div
-            className="bg-[#031D44] p-3 lg:p-6 w-[50%] md:w-[60%] lg:w-[40%] lg:mt-6 flex justify-center max-md:items-center md:text-xl lg:text-3xl font-bold text-[#FCF0CC] rounded-full hover:cursor-pointer hover:scale-105  ease-in duration-200"
+            className="bg-[#031D44] p-3 lg:p-6 w-[50%] md:w-[60%] lg:w-[40%] lg:mt-6 flex justify-center max-md:items-center md:text-xl lg:text-2xl font-bold text-[#FCF0CC] rounded-full hover:cursor-pointer hover:scale-105  ease-in duration-200"
             onClick={() => navigate("/booking")}
           >
             <div>Book Now</div>
@@ -259,7 +259,7 @@ const Main = () => {
         </div>
 
         {/* Floating Bar */}
-        <div className="max-lg:hidden absolute -bottom-[13%] left-1/2 transform -translate-x-1/2 bg-white flex justify-between items-center px-2 lg:px-20 w-[80%] rounded-3xl shadow-2xl py-8">
+        <div className="max-lg:hidden absolute -bottom-[11%] left-1/2 transform -translate-x-1/2 bg-white flex justify-between items-center px-2 lg:px-20 w-[80%] rounded-3xl shadow-2xl py-8">
           <div className="flex gap-4 w-[33%]">
             <img
               className="h-10 w-10 lg:h-16 lg:w-16 object-cover"
